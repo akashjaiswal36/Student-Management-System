@@ -1,11 +1,17 @@
 package com.example.student;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
 public class Student {
+
+    @Id
     private int id;
     private String name;
     private String course;
 
-    public Student() {} // default constructor required for Spring JSON binding
+    public Student() {}
 
     public Student(int id, String name, String course) {
         this.id = id;
@@ -13,34 +19,17 @@ public class Student {
         this.course = course;
     }
 
-    // ✅ These are required
-    public int getId() {
-        return id;
-    }
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
-    public String getCourse() {
-        return course;
-    }
-
-    // Optional: Add setters if you're using form data or need to update values
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setCourse(String course) {
-        this.course = course;
-    }
+    public String getCourse() { return course; }
+    public void setCourse(String course) { this.course = course; }
 
     @Override
     public String toString() {
-        return "ID:" + id + ", Name:" + name + ", Course:" + course;
+        return "ID: " + id + ", Name: " + name + ", Course: " + course;
     }
 }
