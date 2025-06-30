@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><title>Student Manager</title>
+  <style>body{font-family:sans-serif;margin:2rem;}table{border-collapse:collapse}th,td{border:1px solid #aaa;padding:.4rem}</style>
+</head>
+<body>
+<h2>Add Student</h2>
+<form id="addForm">
+  ID <input name="id" required> 
+  Name <input name="name" required> 
+  Course <input name="course" required>
+  <button type="submit">Save</button>
+</form>
+
+<h2>Students</h2>
+<table id="tbl">
+  <thead><tr><th>ID</th><th>Name</th><th>Course</th></tr></thead>
+  <tbody></tbody>
+</table>
+
+<script>
+async function load(){
+  const res = await fetch('/api/students'); const data = await res.json();
+  const rows = data.map(s => `<tr><td>${s.id}</td><td>${s.name}</td><td>${s.course}</td></tr>`).join('');
+  document.querySelector('#tbl tbody').innerHTML = rows;
+}
+document.getElementById('addForm').onsubmit = async e=>{
+  e.preventDefault();
+  const f = Object.fromEntries(new FormData(e.target));
+  await fetch('/api/students',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(f)});
+  e.target.reset(); load();
+};
+load();
+</script>
+</body>
+</html>

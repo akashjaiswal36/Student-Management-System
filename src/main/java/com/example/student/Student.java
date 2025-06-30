@@ -5,18 +5,13 @@ public class Student {
     private String name;
     private String course;
 
+    // constructors, getters, setters omitted for brevity
+    public Student() { }                         // needed for JSON binding
     public Student(int id, String name, String course) {
-        this.id = id;
-        this.name = name;
-        this.course = course;
+        this.id = id; this.name = name; this.course = course;
     }
-
-    public int getId() { return id; }
-    public String getName() { return name; }
-    public String getCourse() { return course; }
-
-    @Override
-    public String toString() {
-        return "ID: " + id + ", Name: " + name + ", Course: " + course;
+    // getters & setters …
+    @Override public String toString() {
+        return "ID:" + id + ", Name:" + name + ", Course:" + course;
     }
 }
